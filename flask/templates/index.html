@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero-section text-white text-center">
+    <div class="container px-4 py-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+                <img src="{{ url_for('static', filename='image/eu.jpg') }}" class="d-block mx-lg-auto img-fluid rounded-3 shadow" alt="Hero Image" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold lh-1 mb-3">Bem-vindo ao Meu Projeto Flask</h1>
+                <p class="lead">Uma solução moderna e elegante para suas necessidades. Construído com Flask, este projeto oferece performance, segurança e uma experiência incrível para o usuário.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Começar</button>
+                    <button type="button" class="btn btn-outline-light btn-lg px-4">Saiba mais</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Nossos Recursos</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 feature-card">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-rocket fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title">Rápido & Poderoso</h3>
+                        <p class="card-text">Nosso sistema é otimizado para performance máxima, garantindo tempos de carregamento rápidos e operações eficientes.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 feature-card">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title">Seguro & Confiável</h3>
+                        <p class="card-text">Segurança é nossa prioridade. Implementamos as melhores práticas para proteger seus dados e garantir confiabilidade.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 feature-card">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-paint-brush fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title">Elegante & Intuitivo</h3>
+                        <p class="card-text">Design moderno e intuitivo que proporciona uma experiência de usuário excepcional em todos os dispositivos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta py-5 text-white text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="mb-4">Pronto para começar?</h2>
+                <p class="lead mb-4">Junte-se a milhares de usuários satisfeitos e transforme sua experiência hoje mesmo.</p>
+                <a href="{{ url_for('main.register') }}" class="btn btn-light btn-lg">Registre-se agora</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">O que dizem nossos usuários</h2>
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card testimonial-card">
+                    <div class="card-body">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="card-text">"Esta plataforma superou todas as minhas expectativas. A interface é intuitiva e as funcionalidades são exatamente o que eu precisava."</p>
+                        <div class="testimonial-author d-flex align-items-center mt-3">
+                            <div class="author-avatar me-3">
+                                <img src="{{ url_for('static', filename='images/avatar1.jpg') }}" alt="Avatar" class="rounded-circle" width="50">
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Ana Silva</h5>
+                                <small class="text-muted">CEO, Tech Solutions</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card testimonial-card">
+                    <div class="card-body">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="card-text">"Implementamos este sistema há 6 meses e nossa produtividade aumentou significativamente. Altamente recomendado!"</p>
+                        <div class="testimonial-author d-flex align-items-center mt-3">
+                            <div class="author-avatar me-3">
+                                <img src="{{ url_for('static', filename='images/avatar2.jpg') }}" alt="Avatar" class="rounded-circle" width="50">
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Carlos Mendes</h5>
+                                <small class="text-muted">CTO, Inovação Digital</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card testimonial-card">
+                    <div class="card-body">
+                        <div class="testimonial-rating mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star-half-alt text-warning"></i>
+                        </div>
+                        <p class="card-text">"O suporte ao cliente é excepcional e o sistema é muito flexível, permitindo personalizações para nossas necessidades específicas."</p>
+                        <div class="testimonial-author d-flex align-items-center mt-3">
+                            <div class="author-avatar me-3">
+                                <img src="{{ url_for('static', filename='images/avatar3.jpg') }}" alt="Avatar" class="rounded-circle" width="50">
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Luciana Costa</h5>
+                                <small class="text-muted">Gerente, Solutions Corp</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #4e73df 0%, #2e59d9 100%);">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('main.index') }}">
+      <i class="fas fa-flask me-2"></i>BlueFlask
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('main.index') }}">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.recursos') }}">Recursos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.sobre') }}">Sobre</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.contato') }}">Contato</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <a href="{{ url_for('main.login') }}" class="btn btn-outline-light me-2">Entrar</a>
+        <a href="{{ url_for('main.register') }}" class="btn btn-light">Criar Conta</a>
+      </div>
+    </div>
+  </div>
+</nav>

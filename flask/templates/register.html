@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Criar Conta{% endblock %}
+
+{% block content %}
+<section class="auth-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg">
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h2 class="font-weight-bold mb-0">Criar Conta</h2>
+                    </div>
+                    <div class="card-body p-5">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <form action="{{ url_for('main.register') }}" method="POST">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="nome" class="form-label">Nome</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="sobrenome" class="form-label">Sobrenome</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Seu sobrenome" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="email" class="form-label">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="senha" class="form-label">Senha</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Sua senha" required>
+                                    </div>
+                                    <div class="form-text">A senha deve ter pelo menos 8 caracteres.</div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="confirma_senha" class="form-label">Confirmar Senha</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="confirma_senha" name="confirma_senha" placeholder="Confirme sua senha" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="termos" name="termos" required>
+                                <label class="form-check-label" for="termos">
+                                    Eu concordo com os <a href="#" class="text-decoration-none">Termos de Serviço</a> e <a href="#" class="text-decoration-none">Política de Privacidade</a>
+                                </label>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Criar Conta</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center py-3 bg-light">
+                        <div>
+                            Já tem uma conta? <a href="{{ url_for('main.login') }}" class="text-decoration-none">Faça Login</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <p class="text-muted mb-3">Ou registre-se com</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-section {
+        background-color: #f8f9fc;
+        min-height: calc(100vh - 180px);
+        display: flex;
+        align-items: center;
+    }
+    
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    }
+    
+    .input-group-text {
+        background-color: #f8f9fc;
+    }
+    
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+    
+    .btn-primary:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-outline-primary {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: var(--primary-color);
+        color: white;
+    }
+</style>
+{% endblock %}
