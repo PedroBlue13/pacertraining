@@ -1,0 +1,359 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - FlowerML{% endblock %}
+
+{% block extra_css %}
+<style>
+.dashboard-header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+    border-radius: 0 0 2rem 2rem;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: var(--transition);
+    border: 1px solid var(--gray-100);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-card {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.stat-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.action-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 2px solid transparent;
+    text-decoration: none;
+    color: inherit;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+    text-decoration: none;
+    color: inherit;
+}
+
+.action-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.action-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--gray-800);
+}
+
+.action-description {
+    color: var(--gray-600);
+    font-size: 0.95rem;
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 2.5rem;
+    border: 4px solid white;
+    box-shadow: var(--shadow-lg);
+}
+
+.welcome-text {
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.125rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .welcome-text {
+        font-size: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header do Dashboard -->
+<div class="dashboard-header">
+    <div class="container">
+        <div class="welcome-section">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <h1 class="welcome-text">Olá, {{ user.get_full_name|default:user.username }}!</h1>
+            <p class="welcome-subtitle">Bem-vindo ao seu dashboard FlowerML</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Estatísticas -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="dashboard-card stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="stat-number">{{ total_predictions|default:0 }}</div>
+                <div class="stat-label">Predições Realizadas</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="dashboard-card stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-number">95.2%</div>
+                <div class="stat-label">Precisão Média</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="dashboard-card stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="stat-number">3</div>
+                <div class="stat-label">Espécies Identificadas</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações Rápidas -->
+    <div class="row">
+        <div class="col-12">
+            <h3 class="mb-4">Ações Rápidas</h3>
+            <div class="quick-actions">
+                <a href="{% url 'predict' %}" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="action-title">Nova Predição</div>
+                    <div class="action-description">Identifique uma nova espécie de flor</div>
+                </a>
+                
+                <a href="{% url 'history' %}" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="action-title">Histórico</div>
+                    <div class="action-description">Veja suas predições anteriores</div>
+                </a>
+                
+                <a href="{% url 'profile' %}" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <div class="action-title">Perfil</div>
+                    <div class="action-description">Gerencie suas informações</div>
+                </a>
+                
+                <a href="{% url 'about' %}" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="action-title">Sobre o FlowerML</div>
+                    <div class="action-description">Saiba mais sobre nossa IA</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Predições Recentes -->
+    {% if recent_predictions %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="dashboard-card">
+                <h4 class="mb-3">
+                    <i class="fas fa-clock me-2 text-primary"></i>
+                    Predições Recentes
+                </h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Espécie</th>
+                                <th>Confiança</th>
+                                <th>Método</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prediction in recent_predictions %}
+                            <tr>
+                                <td>{{ prediction.created_at|date:"d/m/Y H:i" }}</td>
+                                <td>
+                                    <strong>{{ prediction.species }}</strong>
+                                </td>
+                                <td>
+                                    <span class="badge bg-{% if prediction.confidence > 90 %}success{% elif prediction.confidence > 70 %}warning{% else %}danger{% endif %}">
+                                        {{ prediction.confidence|floatformat:1 }}%
+                                    </span>
+                                </td>
+                                <td>
+                                    <i class="fas fa-{% if prediction.method == 'image' %}camera{% else %}keyboard{% endif %} me-1"></i>
+                                    {{ prediction.get_method_display }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="{% url 'history' %}" class="btn btn-outline-primary">
+                        Ver Todas as Predições
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <!-- Primeira vez no sistema -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="dashboard-card text-center">
+                <div class="py-5">
+                    <i class="fas fa-seedling text-primary" style="font-size: 4rem; margin-bottom: 2rem;"></i>
+                    <h4>Bem-vindo ao FlowerML!</h4>
+                    <p class="text-muted mb-4">
+                        Você ainda não fez nenhuma predição. Que tal começar agora mesmo?
+                    </p>
+                    <a href="{% url 'predict' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-play me-2"></i>
+                        Fazer Primeira Predição
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Animação dos números das estatísticas
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    const animateNumbers = () => {
+        statNumbers.forEach(element => {
+            const finalNumber = parseInt(element.textContent) || 0;
+            let currentNumber = 0;
+            const increment = finalNumber / 50;
+            
+            const timer = setInterval(() => {
+                currentNumber += increment;
+                if (currentNumber >= finalNumber) {
+                    element.textContent = finalNumber + (element.textContent.includes('%') ? '%' : '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(currentNumber) + (element.textContent.includes('%') ? '%' : '');
+                }
+            }, 30);
+        });
+    };
+
+    // Executar animação após carregamento
+    setTimeout(animateNumbers, 500);
+
+    // Adicionar efeito de hover nos cards
+    const cards = document.querySelectorAll('.dashboard-card, .action-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});
+</script>
+{% endblock %}

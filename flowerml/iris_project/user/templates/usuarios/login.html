@@ -1,0 +1,499 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - FlowerML{% endblock %}
+
+{% block body_class %}login-page{% endblock %}
+
+{% block main_class %}main-content no-padding{% endblock %}
+
+{% block extra_css %}
+<style>
+.login-page {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%);
+    min-height: 100vh;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-side {
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(255, 255, 255, 0.9));
+}
+
+.brand-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.brand-logo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+}
+
+.brand-logo i {
+    font-size: 2rem;
+    color: white;
+}
+
+.brand-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--gray-800);
+    margin-bottom: 0.5rem;
+}
+
+.brand-title strong {
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.brand-subtitle {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    margin-bottom: 0;
+}
+
+.form-section h2 {
+    font-size: 2rem;
+    color: var(--gray-800);
+    margin-bottom: 0.5rem;
+}
+
+.form-section p {
+    color: var(--gray-600);
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+}
+
+.form-floating {
+    margin-bottom: 1.5rem;
+}
+
+.form-floating .form-control {
+    height: 4rem;
+    padding: 1.5rem 1rem 0.5rem;
+    border: 2px solid var(--gray-200);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.form-floating .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    background: white;
+}
+
+.form-floating label {
+    color: var(--gray-500);
+    font-weight: 500;
+}
+
+.btn-login {
+    width: 100%;
+    height: 3.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.btn-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-login:hover::before {
+    left: 100%;
+}
+
+.link-register {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--gray-600);
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+.link-register:hover {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.hero-side {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-side::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-side::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -30%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-icon {
+    font-size: 6rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.features-list {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.feature-item i {
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    opacity: 0.8;
+}
+
+/* Animações de entrada */
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.fade-in-left {
+    animation: fadeInLeft 0.8s ease-out 0.2s both;
+}
+
+.fade-in-right {
+    animation: fadeInRight 0.8s ease-out 0.4s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .login-side, .hero-side {
+        padding: 2rem;
+    }
+    
+    .brand-title {
+        font-size: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-icon {
+        font-size: 4rem;
+    }
+    
+    .form-section h2 {
+        font-size: 1.75rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid login-container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+            <div class="row login-card mx-0">
+                <!-- Formulário de Login -->
+                <div class="col-lg-6 login-side fade-in-left">
+                    <div class="brand-section">
+                        <div class="brand-logo">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h1 class="brand-title">Flower<strong>ML</strong></h1>
+                        <p class="brand-subtitle">Inteligência Artificial para Flores</p>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Bem-vindo de volta!</h2>
+                        <p>Acesse sua conta para explorar o mundo das flores.</p>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} fade-in-up" role="alert">
+                                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'danger' %}exclamation-circle{% elif message.tags == 'warning' %}exclamation-triangle{% else %}info-circle{% endif %} me-2"></i>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <form action="{% url 'login' %}" method="POST" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            
+                            <div class="form-floating">
+                                <input type="email" 
+                                       class="form-control" 
+                                       id="email" 
+                                       name="email" 
+                                       placeholder="nome@exemplo.com" 
+                                       required>
+                                <label for="email">
+                                    <i class="fas fa-envelope me-2"></i>E-mail
+                                </label>
+                                <div class="invalid-feedback">
+                                    Por favor, insira um e-mail válido.
+                                </div>
+                            </div>
+
+                            <div class="form-floating">
+                                <input type="password" 
+                                       class="form-control" 
+                                       id="senha" 
+                                       name="senha" 
+                                       placeholder="Senha" 
+                                       required>
+                                <label for="senha">
+                                    <i class="fas fa-lock me-2"></i>Senha
+                                </label>
+                                <div class="invalid-feedback">
+                                    Por favor, insira sua senha.
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="lembrar">
+                                    <label class="form-check-label" for="lembrar">
+                                        Lembrar de mim
+                                    </label>
+                                </div>
+                                <a href="" class="text-decoration-none">
+                                    Esqueceu a senha?
+                                </a>
+                            </div>
+
+                            <button type="submit" class="btn btn-login">
+                                <i class="fas fa-sign-in-alt me-2"></i>
+                                Entrar
+                            </button>
+                        </form>
+
+                        <a href="{% url 'cadastro' %}" class="link-register">
+                            Não tem uma conta? <strong>Cadastre-se aqui</strong>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Section -->
+                <div class="col-lg-6 hero-side fade-in-right">
+                    <div class="hero-content">
+                        <div class="hero-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h2 class="hero-title">Descubra o Mundo das Flores</h2>
+                        <p class="hero-description">
+                            Use nossa inteligência artificial avançada para identificar e classificar espécies de flores com precisão incrível.
+                        </p>
+                        
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-brain"></i>
+                                <span>IA Avançada para Classificação</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-camera"></i>
+                                <span>Análise por Imagem</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Resultados Precisos</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-history"></i>
+                                <span>Histórico de Predições</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Validação do formulário
+    const forms = document.querySelectorAll('.needs-validation');
+    
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+
+    // Animação de foco nos inputs
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (this.value === '') {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+    });
+
+    // Efeito de digitação no título
+    const title = document.querySelector('.hero-title');
+    if (title) {
+        const text = title.textContent;
+        title.textContent = '';
+        let index = 0;
+        
+        function typeWriter() {
+            if (index < text.length) {
+                title.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        setTimeout(typeWriter, 1000);
+    }
+});
+</script>
+{% endblock %}
